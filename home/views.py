@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
-from rest_framework import viewsets
+from django.views.generic import TemplateView
+from rest_framework import viewsets, permissions
+from rest_framework.permissions import IsAdminUser
 from home.models import Home, Member
+from home.permissions import HomeManagerPermission
 from home.serializers import UserSerializer, HomeSerializer, MemberSerializer
 
 
@@ -10,6 +13,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (IsAdminUser,)
 
 
 class HomeViewSet(viewsets.ModelViewSet):
@@ -18,6 +22,7 @@ class HomeViewSet(viewsets.ModelViewSet):
     """
     queryset = Home.objects.all()
     serializer_class = HomeSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class MemberViewSet(viewsets.ModelViewSet):
@@ -26,3 +31,4 @@ class MemberViewSet(viewsets.ModelViewSet):
     """
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
+    permission_classes = (HomeManagerPermission, permissions.IsAuthenticated)

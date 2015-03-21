@@ -1,0 +1,6 @@
+Django==1.7.3
+Pillow==2.7.0
+PyYAML==3.11
+django-rest-swagger==0.2.8
+djangorestframework==3.0.3
+wsgiref==0.1.2
