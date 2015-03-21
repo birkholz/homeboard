@@ -11,7 +11,7 @@ class AbstractTimestampModel(models.Model):
 
 
 class Home(AbstractTimestampModel):
-    title = models.CharField(unique=True, max_length=20) # The name used in the url
+    title = models.CharField(max_length=50) # The name used in the url
     manager = models.ForeignKey(User, related_name='managed_homes')
     members = models.ManyToManyField(User, through='Member', related_name='homes')
 

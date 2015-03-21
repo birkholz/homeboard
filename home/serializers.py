@@ -9,11 +9,18 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'username', 'email', 'is_staff')
 
 
-class HomeSerializer(serializers.HyperlinkedModelSerializer):
+class HomeSerializer(serializers.ModelSerializer):
+    is_manager = serializers.SerializerMethodField()
+
     class Meta:
         model = Home
-        fields = ('title', 'manager', 'members')
+        fields = ('id', 'title', 'manager', 'members', 'is_manager')
 
+    def get_is_manager(self, obj):
+        request = self.context.get('request', None)
+        if request is not None:
+            return obj.manager == request.user
+        return False
 
 class MemberSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
