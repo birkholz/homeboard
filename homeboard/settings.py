@@ -63,15 +63,20 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     # "allauth.socialaccount.context_processors.socialaccount",
 )
 
+class DisableCSRF(object):
+    def process_request(self, request):
+            setattr(request, '_dont_enforce_csrf_checks', True)
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'homeboard.settings.DisableCSRF'
 )
 
 AUTHENTICATION_BACKENDS = (
