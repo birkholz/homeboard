@@ -6,7 +6,7 @@ from home.models import AbstractTimestampModel, Home
 class Chore(AbstractTimestampModel):
     home = models.ForeignKey(Home, related_name='chores')
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     assigned_to = models.ManyToManyField(User, through='Assignment')
     completed = models.DateTimeField(null=True, blank=True)
 
