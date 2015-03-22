@@ -127,7 +127,6 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAdminUser',
-        'rest_framework.authentication.TokenAuthentication',
     ),
     # 'PAGINATE_BY': 10
 }

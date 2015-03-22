@@ -8,3 +8,4 @@ class Bill(AbstractTimestampModel):
     author = models.ForeignKey(User, related_name='authored_bills')
 
     amount = models.DecimalField(max_digits=8, decimal_places=2)
+    paid = models.DateTimeField(null=True, blank=True)

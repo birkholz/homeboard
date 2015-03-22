@@ -3,10 +3,10 @@ from rest_framework import serializers
 from home.models import Home, Member
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'is_staff')
+        fields = ('id', 'url', 'username', 'email', 'is_staff')
 
 
 class HomeSerializer(serializers.ModelSerializer):
@@ -22,6 +22,6 @@ class HomeSerializer(serializers.ModelSerializer):
             return obj.manager == request.user
         return False
 
-class MemberSerializer(serializers.HyperlinkedModelSerializer):
+class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
