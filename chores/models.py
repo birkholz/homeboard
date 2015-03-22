@@ -1,5 +1,8 @@
 from django.contrib.auth.models import User
+from django.contrib.humanize.templatetags import humanize
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.db import models
+from django.utils import timezone
 from home.models import AbstractTimestampModel, Home
 
 
@@ -12,6 +15,13 @@ class Chore(AbstractTimestampModel):
 
     def __unicode__(self):
         return '%s: %s' % (self.home.title, self.title)
+
+    def pretty_completed(self):
+        if self.completed:
+            current_tz = timezone.get_current_timezone()
+            adjusted = self.completed.astimezone(current_tz)
+            return naturaltime(adjusted)
+        return None
 
     class Meta:
         ordering = ['-created']

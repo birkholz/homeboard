@@ -4,9 +4,14 @@ from chores.models import Chore, Assignment
 
 class ChoreSerializer(serializers.ModelSerializer):
     is_assigned = serializers.SerializerMethodField()
+    pretty_completed = serializers.SerializerMethodField()
+
     class Meta:
         model = Chore
-        fields = ('title', 'description', 'assigned_to', 'is_assigned', 'home', 'id', 'completed')
+        fields = ('title', 'description', 'assigned_to', 'is_assigned', 'home', 'id', 'completed', 'pretty_completed')
+
+    def get_pretty_completed(self, obj):
+        return obj.pretty_completed()
 
     def get_is_assigned(self, obj):
         request = self.context.get('request', None)

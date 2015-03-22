@@ -9,11 +9,13 @@ class ChoreViewSet(viewsets.ModelViewSet):
     serializer_class = ChoreSerializer
 
     def get_queryset(self):
-        queryset = Chore.objects.all()
         home = self.request.QUERY_PARAMS.get('home', None)
-        if home:
-            queryset = queryset.filter(home__id=home)
-        return queryset
+        completed = self.request.QUERY_PARAMS.get('completed', False)
+        if home and completed:
+            return Chore.objects.filter(home__id=home, completed__isnull=False)
+        elif home:
+            return Chore.objects.filter(home__id=home, completed__isnull=True)
+        return Chore.objects.all()
 
 
 class AssignmentViewSet(viewsets.ModelViewSet):
