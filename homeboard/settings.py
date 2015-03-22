@@ -123,6 +123,8 @@ SITE_ID = 1
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+
 
 # Rest Framework
 REST_FRAMEWORK = {
