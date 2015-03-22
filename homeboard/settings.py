@@ -172,3 +172,8 @@ SWAGGER_SETTINGS = {
 # )
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+
+try:
+    from local_settings import *
+except:
+    pass
